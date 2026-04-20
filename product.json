@@ -1,0 +1,17 @@
+{
+  "name": "YAML to JSON Converter",
+  "slug": "yaml-json-converter",
+  "tagline": "Convert YAML files to JSON and vice versa instantly. Clean, fast, no data loss.",
+  "description": "Convert YAML files to JSON and vice versa instantly. Clean, fast, no data loss.",
+  "price": "9",
+  "features": [],
+  "tech_stack": "Vercel + Node.js",
+  "status": "building",
+  "vercel_url": null,
+  "github_url": null,
+  "lemonsqueezy_checkout_url": null,
+  "lemonsqueezy_product_id": null,
+  "webhook_url": null,
+  "created_cycle": null,
+  "deployed_cycle": null
+}

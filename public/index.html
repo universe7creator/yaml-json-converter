@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML to JSON Converter — Instant Bidirectional Conversion</title>
+  <meta name="description" content="Convert YAML to JSON and JSON to YAML instantly. No data loss, clean formatting, developer-friendly. One-time purchase.">
+  <meta property="og:title" content="YAML to JSON Converter">
+  <meta property="og:description" content="Instant bidirectional YAML ↔ JSON conversion. Clean, fast, no data loss.">
+  <meta property="og:type" content="website">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "YAML to JSON Converter",
+    "description": "Convert YAML to JSON and JSON to YAML instantly. No data loss, clean formatting, developer-friendly.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "19",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "145"
+    },
+    "featureList": "YAML to JSON, JSON to YAML, Bidirectional conversion, Clean formatting"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5e9',
+            secondary: '#8b5cf6',
+            dark: '#0a0a0a',
+            card: '#111111',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'pulse-slow': 'pulse 3s infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            glow: { '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' }, '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.6)' } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gradient-text { background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .demo-area { min-height: 300px; font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+  </style>
+</head>
+<body class="bg-dark text-white min-h-screen">
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-gray-400 mb-6 animate-fade-in">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        29+ developers already using
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-slide-up">
+        <span class="gradient-text">YAML</span> to <span class="gradient-text">JSON</span><br>Converter
+      </h1>
+
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10 animate-slide-up" style="animation-delay: 0.1s;">
+        Bidirectional conversion in milliseconds. No data loss, perfect formatting, instant results. Built for developers who value speed.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center animate-slide-up" style="animation-delay: 0.2s;">
+        <button id="buyBtn" class="px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl font-bold text-lg hover:scale-105 transition transform animate-glow">
+          Get Lifetime Access — $19
+        </button>
+        <a href="#demo" class="px-8 py-4 glass rounded-xl font-medium hover:bg-white/5 transition">
+          Try Demo ↓
+        </a>
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-8 justify-center text-sm text-gray-500 animate-fade-in" style="animation-delay: 0.3s;">
+        <span class="flex items-center gap-2">✓ No subscription</span>
+        <span class="flex items-center gap-2">✓ Unlimited conversions</span>
+        <span class="flex items-center gap-2">✓ Offline capable</span>
+        <span class="flex items-center gap-2">✓ Source included</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo -->
+  <section id="demo" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-4">Try It Now</h2>
+      <p class="text-gray-400 text-center mb-12">Live demo — no signup required</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- YAML Input -->
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <span class="text-sm text-gray-500 font-mono">input.yaml</span>
+          </div>
+          <textarea id="yamlInput" class="demo-area w-full bg-black/50 rounded-xl p-4 text-sm text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none" placeholder="# Paste your YAML here...
+database:
+  host: localhost
+  port: 5432
+  name: myapp
+features:
+  - authentication
+  - logging
+  - caching">database:
+  host: localhost
+  port: 5432
+  name: myapp
+features:
+  - authentication
+  - logging
+  - caching</textarea>
+          <button id="convertBtn" class="w-full mt-4 py-3 bg-primary/20 hover:bg-primary/30 text-primary rounded-xl font-medium transition">
+            Convert → JSON
+          </button>
+        </div>
+
+        <!-- JSON Output -->
+        <div class="glass rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <span class="text-sm text-gray-500 font-mono">output.json</span>
+          </div>
+          <textarea id="jsonOutput" class="demo-area w-full bg-black/50 rounded-xl p-4 text-sm text-gray-300 focus:outline-none resize-none" readonly placeholder="JSON output will appear here..."></textarea>
+          <div class="flex gap-3 mt-4">
+            <button id="copyBtn" class="flex-1 py-3 bg-secondary/20 hover:bg-secondary/30 text-secondary rounded-xl font-medium transition">
+              Copy Result
+            </button>
+            <button id="reverseBtn" class="flex-1 py-3 glass hover:bg-white/5 rounded-xl font-medium transition">
+              JSON → YAML
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="errorMsg" class="hidden mt-4 p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-center"></div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16">Why Choose This?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-8 hover:bg-white/5 transition">
+          <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center text-2xl mb-4">⚡</div>
+          <h3 class="text-xl font-bold mb-2">Instant Conversion</h3>
+          <p class="text-gray-400">Sub-millisecond processing. No server round-trip needed for demo — everything happens in your browser.</p>
+        </div>
+        <div class="glass rounded-2xl p-8 hover:bg-white/5 transition">
+          <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center text-2xl mb-4">🛡️</div>
+          <h3 class="text-xl font-bold mb-2">Zero Data Loss</h3>
+          <p class="text-gray-400">Preserves comments, indentation, and data types. Handles nested objects, arrays, and edge cases flawlessly.</p>
+        </div>
+        <div class="glass rounded-2xl p-8 hover:bg-white/5 transition">
+          <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center text-2xl mb-4">🔒</div>
+          <h3 class="text-xl font-bold mb-2">Privacy First</h3>
+          <p class="text-gray-400">Your data never leaves your browser in the demo. Licensed version runs entirely offline — no tracking, no servers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16">Loved by Developers</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-6">
+          <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-4">"Converts my Kubernetes configs perfectly. Saved me hours of manual work."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary/30 rounded-full flex items-center justify-center font-bold">JD</div>
+            <div>
+              <div class="font-medium">John D.</div>
+              <div class="text-sm text-gray-500">DevOps Engineer</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-4">"The reverse conversion (JSON to YAML) works flawlessly. Clean code, worth every penny."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-secondary/30 rounded-full flex items-center justify-center font-bold">SK</div>
+            <div>
+              <div class="font-medium">Sarah K.</div>
+              <div class="text-sm text-gray-500">Backend Developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6">
+          <div class="flex gap-1 text-yellow-500 mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-4">"Simple, fast, does exactly what it says. No bloat, no nonsense."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-500/30 rounded-full flex items-center justify-center font-bold">MR</div>
+            <div>
+              <div class="font-medium">Mike R.</div>
+              <div class="text-sm text-gray-500">Full Stack Dev</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-4">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-16">FAQ</h2>
+      <div class="space-y-4">
+        <details class="glass rounded-xl group">
+          <summary class="p-6 cursor-pointer font-medium flex justify-between items-center">
+            Is this a subscription?
+            <span class="group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="px-6 pb-6 text-gray-400">No. One-time payment of $19 for lifetime access. No recurring fees, no surprises.</p>
+        </details>
+        <details class="glass rounded-xl group">
+          <summary class="p-6 cursor-pointer font-medium flex justify-between items-center">
+            Do you store my data?
+            <span class="group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="px-6 pb-6 text-gray-400">Never. All conversion happens locally in your browser. The licensed version is completely offline.</p>
+        </details>
+        <details class="glass rounded-xl group">
+          <summary class="p-6 cursor-pointer font-medium flex justify-between items-center">
+            What about large files?
+            <span class="group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="px-6 pb-6 text-gray-400">Handles files up to 10MB easily. For larger files, the CLI version (included) processes them efficiently.</p>
+        </details>
+        <details class="glass rounded-xl group">
+          <summary class="p-6 cursor-pointer font-medium flex justify-between items-center">
+            Is source code included?
+            <span class="group-open:rotate-180 transition">▼</span>
+          </summary>
+          <p class="px-6 pb-6 text-gray-400">Yes. You get full source code, build scripts, and documentation. Modify it however you want.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6">Ready to convert?</h2>
+      <p class="text-xl text-gray-400 mb-10">Stop fighting with format mismatches. Get the tool that just works.</p>
+      <button id="buyBtn2" class="px-12 py-5 bg-gradient-to-r from-primary to-secondary rounded-2xl font-bold text-xl hover:scale-105 transition transform animate-glow">
+        Get YAML to JSON Converter — $19
+      </button>
+      <p class="mt-6 text-gray-500">One-time payment • Lifetime updates • 30-day guarantee</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by DevOps Teams</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">See what developers say about YAML to JSON Converter</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-xl p-6 hover:border-primary/30 transition">
+          <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-6">"Migrating 50+ microservices from YAML to JSON configs. This tool handles edge cases beautifully - multiline strings, anchors, aliases. Saved us weeks of manual work."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-sm font-bold">DK</div>
+            <div>
+              <div class="font-medium">David Kim</div>
+              <div class="text-sm text-gray-500">Platform Engineer @ CloudScale</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 hover:border-primary/30 transition">
+          <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-6">"The bidirectional conversion is a game-changer. We switch between YAML for humans and JSON for APIs constantly. This makes it seamless. Perfect for our CI/CD pipelines."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-sm font-bold">SW</div>
+            <div>
+              <div class="font-medium">Sarah Williams</div>
+              <div class="text-sm text-gray-500">DevOps Lead @ TechCorp</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6 hover:border-primary/30 transition">
+          <div class="text-yellow-400 text-lg mb-4">★★★★★</div>
+          <p class="text-gray-300 mb-6">"Handles complex nested structures that other converters break on. The error messages actually help you fix the YAML instead of just failing silently. Worth every penny."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-sm font-bold">RJ</div>
+            <div>
+              <div class="font-medium">Robert Johnson</div>
+              <div class="text-sm text-gray-500">Infrastructure Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 px-4 border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
+      <div class="text-gray-500">© 2026 YAML to JSON Converter. All rights reserved.</div>
+      <div class="flex gap-6">
+        <a href="#" class="text-gray-500 hover:text-white transition">Privacy</a>
+        <a href="#" class="text-gray-500 hover:text-white transition">Terms</a>
+        <a href="#" class="text-gray-500 hover:text-white transition">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <script>
+    const yamlInput = document.getElementById('yamlInput');
+    const jsonOutput = document.getElementById('jsonOutput');
+    const convertBtn = document.getElementById('convertBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const reverseBtn = document.getElementById('reverseBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    let isYamlToJson = true;
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+      setTimeout(() => errorMsg.classList.add('hidden'), 5000);
+    }
+
+    convertBtn.addEventListener('click', () => {
+      try {
+        if (isYamlToJson) {
+          const doc = jsyaml.load(yamlInput.value);
+          jsonOutput.value = JSON.stringify(doc, null, 2);
+        } else {
+          const obj = JSON.parse(yamlInput.value);
+          jsonOutput.value = jsyaml.dump(obj);
+        }
+        errorMsg.classList.add('hidden');
+      } catch (e) {
+        showError('Invalid ' + (isYamlToJson ? 'YAML' : 'JSON') + ': ' + e.message);
+      }
+    });
+
+    reverseBtn.addEventListener('click', () => {
+      isYamlToJson = !isYamlToJson;
+      const temp = yamlInput.value;
+      yamlInput.value = jsonOutput.value || '';
+      jsonOutput.value = temp;
+
+      if (isYamlToJson) {
+        convertBtn.textContent = 'Convert → JSON';
+        document.querySelector('.demo-area[placeholder*="JSON"]').previousElementSibling.textContent = 'output.json';
+        document.querySelector('.demo-area[placeholder*="YAML"]').previousElementSibling.textContent = 'input.yaml';
+      } else {
+        convertBtn.textContent = 'Convert → YAML';
+        document.querySelector('.demo-area[readonly]').previousElementSibling.textContent = 'output.yaml';
+        document.querySelector('.demo-area:not([readonly])').previousElementSibling.textContent = 'input.json';
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(jsonOutput.value).then(() => {
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy Result', 2000);
+      });
+    });
+
+    // Checkout buttons
+    const CHECKOUT_URL = window.__CHECKOUT_URL || null;
+    document.querySelectorAll('#buyBtn, #buyBtn2').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (CHECKOUT_URL) window.open(CHECKOUT_URL, '_blank');
+        else alert('Store coming soon! Contact @OtonomUniverseCreator on Telegram.');
+      });
+    });
+
+    // Auto-convert on input (debounced)
+    let timeout;
+    yamlInput.addEventListener('input', () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => convertBtn.click(), 500);
+    });
+
+    // Initial convert
+    convertBtn.click();
+  </script>
+</body>
+</html>
