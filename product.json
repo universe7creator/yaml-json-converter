@@ -6,7 +6,7 @@
   "price": "9",
   "features": [],
   "tech_stack": "Vercel + Node.js",
-  "status": "building",
+  "status": "ready_to_deploy",
   "vercel_url": null,
   "github_url": null,
   "lemonsqueezy_checkout_url": null,
